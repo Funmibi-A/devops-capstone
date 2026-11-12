@@ -1,0 +1,7 @@
+services:
+  devopsflow:
+    image: devopsflow:1.0
+    container_name: devopsflow-app
+    ports:
+      - "8080:80"
+    restart: unless-stopped
