@@ -1,6 +1,6 @@
 services:
   devopsflow:
-    image: devopsflow:1.0
+    image: ghcr.io/funmibi-a/devopsflow:latest
     container_name: devopsflow-app
     ports:
       - "8080:80"

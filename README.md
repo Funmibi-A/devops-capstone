@@ -1,238 +1,221 @@
 # DevOpsFlow – Automated CI/CD Pipeline
 
+![network diagram](screenshots/network_diagram.png)
+
 ![CI/CD Status](https://img.shields.io/github/actions/workflow/status/Funmibi-A/devops-capstone/ci.yml?branch=main&label=CI%2FCD)
 ![Node.js](https://img.shields.io/badge/Node.js-24-green)
 ![React](https://img.shields.io/badge/React-19-blue)
 ![Docker](https://img.shields.io/badge/Docker-containerized-blue)
 ![Kubernetes](https://img.shields.io/badge/Kubernetes-deployment-326CE5)
 
+
 ## 1. Project Overview
 
-DevOpsFlow is a web-based dashboard developed to demonstrate an automated Continuous Integration and Continuous Deployment (CI/CD) pipeline.
+DevOpsFlow is a web-based dashboard developed to demonstrate the implementation of an automated Continuous Integration and Continuous Deployment (CI/CD) pipeline.
 
-The project integrates modern DevOps tools and practices to automate application testing, building, security scanning, container image publishing, staging deployment and production deployment.
+The project integrates modern DevOps tools and practices to automate application testing, code quality checks, security scanning, container image publishing, Kubernetes staging deployment and production deployment.
 
-The application is built with React and Vite, while GitHub Actions orchestrates the CI/CD workflow.
+The frontend is built with React and Vite, while GitHub Actions orchestrates the CI/CD workflow.
 
-## 2. Key Features
+### Application Preview
 
-- Automated CI/CD using GitHub Actions.
-- Code quality checks using ESLint.
-- Unit testing with Vitest.
-- End-to-end browser testing with Playwright.
-- Dependency vulnerability scanning using npm audit.
-- Automated production build and JavaScript bundle-size analysis.
-- Docker image creation and publishing to GitHub Container Registry (GHCR).
-- Container vulnerability scanning using Trivy.
-- Automated staging deployment to Kubernetes using Minikube.
-- Production deployment through GitHub Pages with environment approval.
-- Workflow concurrency control to manage overlapping runs.
+The dashboard provides a visual overview of pipeline stages, deployment environments and deployment history.
 
-## 3. Technology Stack
+![Initial DevOpsFlow Dashboard](screenshots/07-dashboard-initial-preview.png)
+
+![DevOpsFlow Browser Access](screenshots/12-devopsflow-browser-access.png)
+
+## 2. Technology Stack
 
 | Category | Technology |
 |---|---|
 | Frontend | React 19 |
 | Build Tool | Vite 8 |
 | Runtime | Node.js 24 |
+| Version Control | Git and GitHub |
 | Code Quality | ESLint |
 | Unit Testing | Vitest |
-| E2E Testing | Playwright |
+| End-to-End Testing | Playwright |
 | CI/CD | GitHub Actions |
 | Containerisation | Docker |
 | Container Registry | GitHub Container Registry |
-| Security Scanning | npm audit, Trivy |
+| Security Scanning | npm audit and Trivy |
 | Orchestration | Kubernetes |
 | Local Cluster | Minikube |
-| Deployment | GitHub Pages |
+| Production Hosting | GitHub Pages |
 
-## 4. CI/CD Pipeline Architecture
+### Development Environment
 
-The pipeline is configured in `.github/workflows/ci.yml`.
+The project was developed using Node.js, npm, Git and a React development environment.
 
-It is triggered automatically when code is pushed to the `main` branch or when a pull request targets `main`.
+![Node npm and Git versions](screenshots/01-node-npm-git-versions.png)
 
-### Pipeline stages
+![React application running](screenshots/02-react-app-running.png)
 
-1. **Checkout:** Retrieves the project source code.
-2. **Dependency installation:** Installs project dependencies using `npm ci`.
-3. **Security audit:** Checks npm dependencies for high and critical vulnerabilities.
-4. **Code quality:** Runs ESLint.
-5. **Unit testing:** Executes Vitest tests.
-6. **End-to-end testing:** Runs Playwright browser tests.
-7. **Build:** Creates an optimised production build.
-8. **Bundle analysis:** Checks the compressed JavaScript bundle against a 100 KB budget.
-9. **Docker build:** Creates the application container image.
-10. **Container security:** Scans the Docker image using Trivy.
-11. **Image publishing:** Pushes the container image to GHCR.
-12. **Staging deployment:** Deploys the application to Minikube using a self-hosted GitHub Actions runner.
-13. **Production deployment:** Deploys the application to GitHub Pages after the staging deployment and required production approval.
+![GitHub repository](screenshots/03-github-repo.png)
 
-### Pipeline flow
+## 3. Application Development
 
-```text
-Developer Push / Pull Request
-             |
-             v
-       GitHub Actions
-             |
-             v
-    Install Dependencies
-             |
-             v
-     npm Security Audit
-             |
-             v
-       ESLint Checks
-             |
-             v
-       Unit Testing
-             |
-             v
-     Playwright E2E Tests
-             |
-             v
-      Production Build
-             |
-             v
-    Bundle Size Analysis
-             |
-             v
-       Docker Build
-             |
-             v
-       Trivy Scan
-             |
-             v
-      Publish to GHCR
-             |
-             v
-    Deploy to Minikube
-             |
-             v
-     Production Approval
-             |
-             v
-    Deploy to GitHub Pages
-```
+The application was developed using React and Vite. The dashboard presents the CI/CD pipeline stages, environment statuses and deployment history.
 
-## 5. Getting Started
+Initial development included installing the required dependencies, implementing the dashboard and validating the application build.
 
-### Prerequisites
+### Code Quality
 
-Ensure the following tools are installed:
+ESLint was configured to identify code quality issues and maintain consistent coding standards.
 
-- Node.js 24 or later
-- npm
-- Git
-- Docker
-- kubectl
-- Minikube (for local Kubernetes deployment)
+![ESLint validation success](screenshots/04-eslint-success.png)
 
-### Clone the repository
+### Dependencies and Production Build
 
-```bash
-git clone https://github.com/Funmibi-A/devops-capstone.git
-cd devops-capstone
-```
+![Dashboard dependencies](screenshots/06-dashboard-dependencies.png)
 
-### Install dependencies
+The production build was generated using Vite.
 
-```bash
-npm ci
-```
+![Production build success](screenshots/05-production-build-success.png)
 
-### Start the development server
+## 4. Continuous Integration and Continuous Deployment
 
-```bash
-npm run dev
-```
+The CI/CD pipeline is implemented using GitHub Actions in:
 
-Open the local URL displayed in the terminal to access the application.
+`.github/workflows/ci.yml`
 
-## 6. Testing and Code Quality
+The workflow runs automatically when code is pushed to the `main` branch or when a pull request targets `main`.
 
-### Run ESLint
+### Pipeline Stages
 
-```bash
-npm run lint
-```
+1. Checkout the source code.
+2. Install dependencies using `npm ci`.
+3. Audit npm dependencies.
+4. Run ESLint.
+5. Execute unit tests using Vitest.
+6. Run browser-based end-to-end tests using Playwright.
+7. Build the production application.
+8. Check JavaScript bundle size.
+9. Build the Docker image.
+10. Scan the container image using Trivy.
+11. Publish the image to GitHub Container Registry.
+12. Deploy the application to Kubernetes staging.
+13. Deploy to GitHub Pages after staging and production approval.
 
-### Run unit tests
+### Automated Workflow
+
+The initial CI workflow was configured to automate application validation and building.
+
+![Initial GitHub Actions CI success](screenshots/08-github-actions-ci-success.png)
+
+The completed DevOpsFlow workflow integrates testing, container publishing and deployment stages.
+
+![DevOpsFlow CI CD workflow success](screenshots/26-devopsflow-cicd-workflow-success.png)
+
+## 5. Automated Testing
+
+Automated testing helps validate the application before deployment.
+
+### Unit Testing
+
+Vitest is used to execute application unit tests.
+
+Run locally:
 
 ```bash
 npm run test -- --run
 ```
 
-### Run end-to-end tests
+### End-to-End Testing
 
-Install the Playwright Chromium browser if it is not already installed:
+Playwright is used to test the application through a browser. The implemented tests cover:
+
+- Dashboard loading.
+- Pipeline stages.
+- Deployment environment statuses.
+- Deployment history.
+
+Run locally:
 
 ```bash
 npx playwright install chromium
-```
-
-Run the tests:
-
-```bash
 npm run test:e2e
 ```
 
-### Run the dependency security audit
+The Playwright end-to-end test suite completed successfully.
+
+![Playwright end-to-end tests](screenshots/31-devopsflow-playwright-e2e-tests.png)
+
+The tests were also integrated into the GitHub Actions workflow.
+
+![Playwright CI CD success](screenshots/32-devopsflow-playwright-ci-cd-success.png)
+
+## 6. Security and Pipeline Optimisation
+
+Several measures were introduced to improve application security and workflow reliability.
+
+### Dependency Security Audit
+
+The pipeline uses npm audit to identify vulnerable dependencies.
 
 ```bash
 npm audit --audit-level=high
 ```
 
-The pipeline fails if vulnerabilities at the configured high or critical severity threshold are detected.
+The CI workflow fails when vulnerabilities at the configured high or critical severity threshold are detected.
 
-### Check JavaScript bundle size
+![npm audit CI success](screenshots/33-devopsflow-npm-audit-ci-success.png)
 
-First, build the application:
+### Workflow Concurrency
+
+Concurrency control was implemented to manage overlapping workflow executions and cancel redundant pull request runs.
+
+![Workflow concurrency control](screenshots/34-devopsflow-concurrency-ci-success.png)
+
+### JavaScript Bundle Size Analysis
+
+A custom Node.js script was developed to calculate compressed JavaScript bundle sizes and enforce a 100 KB budget.
+
+Run locally:
 
 ```bash
 npm run build
-```
-
-Then run:
-
-```bash
 npm run check:bundle
 ```
 
-The custom bundle-size script calculates the compressed JavaScript asset size and checks it against a 100 KB budget.
+![Bundle size analysis success](screenshots/35-devopsflow-bundle-size-analysis-success.png)
 
-## 7. Docker
+## 7. Docker Containerisation
 
 The application is containerised using Docker and served through Nginx.
 
-### Build the application
+The Dockerfile uses an Nginx Alpine base image, applies available Alpine security updates and copies the production build into the Nginx web directory.
+
+### Build the Application
 
 ```bash
 npm run build
 ```
 
-### Build the Docker image
+### Build the Docker Image
 
 ```bash
 docker build -t devopsflow:latest .
 ```
 
-### Run the container
+### Run the Container
 
 ```bash
 docker run -d -p 8080:80 --name devopsflow devopsflow:latest
 ```
 
-Access the application at:
+The application can then be accessed at:
 
-```text
-http://localhost:8080
-```
+`http://localhost:8080`
 
-### Container Registry
+![Dockerised dashboard running](screenshots/10-dockerized-dashboard-running.png)
 
-The CI/CD pipeline publishes images to GitHub Container Registry.
+### GitHub Container Registry
+
+The CI/CD pipeline builds and publishes Docker images to GitHub Container Registry (GHCR).
+
+The published image uses the following tags:
 
 ```text
 ghcr.io/funmibi-a/devopsflow:latest
@@ -240,66 +223,192 @@ ghcr.io/funmibi-a/devopsflow:staging
 ghcr.io/funmibi-a/devopsflow:sha-<commit-sha>
 ```
 
-## 8. Kubernetes Staging Deployment
+![GHCR published image running](screenshots/11-ghcr-published-image-running.png)
 
-The staging environment runs on Minikube and is managed using Kubernetes manifests.
+A Docker Compose deployment using the published image was also tested.
 
-The deployment configuration is located in the `k8s/` directory.
+![Docker Compose GHCR deployment](screenshots/13-docker-compose-ghcr-deployment.png)
 
-### Apply the staging namespace
+### Container Security Scanning
+
+Trivy is integrated into the CI/CD workflow to scan Docker images for operating system and application library vulnerabilities.
+
+The pipeline is configured to fail when HIGH or CRITICAL vulnerabilities are detected.
+
+## 8. Kubernetes and Minikube
+
+Minikube provides the local Kubernetes environment used for staging deployment.
+
+The Kubernetes configuration is maintained in the `k8s/` directory.
+
+### Minikube Cluster Setup
+
+The Minikube cluster was started and verified before deploying the application.
+
+![Minikube cluster running](screenshots/12-minikube-cluster-running.png)
+
+![Minikube status](screenshots/18-minikube-status.png)
+
+### Ingress Configuration
+
+The Minikube NGINX ingress addon was enabled to provide access to the application through a custom hostname.
+
+![Minikube ingress addon status](screenshots/14-minikube-ingress-addon-status.png)
+
+The ingress resource was configured for the DevOpsFlow staging hostname.
+
+![DevOpsFlow ingress resource](screenshots/15-devopsflow-ingress-resource.png)
+
+![Ingress configuration](screenshots/20-ingress-configuration.png)
+
+### Kubernetes Resources
+
+The application uses Kubernetes Deployment, Service and Ingress resources.
+
+![Kubernetes manifests](screenshots/21-kubernetes-manifests.png)
+
+![Kubernetes resources](screenshots/19-kubernetes-resources.png)
+
+### Deployment and Routing Verification
+
+The cluster and application resources were checked to verify their health.
+
+![Kubernetes cluster health](screenshots/22-kubernetes-cluster-health.png)
+
+HTTP access was tested through NodePort and Ingress routing.
+
+![NodePort HTTP test](screenshots/23-nodeport-http-test.png)
+
+![Ingress HTTP test](screenshots/24-ingress-http-test.png)
+
+The custom ingress hostname was also configured and tested.
+
+![Custom ingress domain](screenshots/17-devopsflow-custom-ingress-domain.png)
+
+![Ingress routing success](screenshots/16-devopsflow-ingress-routing-success.png)
+
+The following diagram illustrates the Kubernetes routing architecture.
+
+![Kubernetes routing architecture](screenshots/25-kubernetes-routing-architecture.png)
+
+## 9. Automated Staging Deployment
+
+The staging deployment is automated through GitHub Actions using a self-hosted Linux runner connected to the local Minikube cluster.
+
+The workflow applies the staging deployment manifest and verifies the Kubernetes rollout.
+
+The staging deployment is configured with:
+
+- Kubernetes Deployment.
+- One application replica.
+- Nginx container serving the production build.
+- Readiness and liveness probes.
+- Staging namespace.
+- Automated rollout verification.
+
+The staging hostname is:
+
+`devopsflow-staging.local`
+
+The deployment workflow also performs an HTTP verification after deployment.
+
+![Staging deployment success](screenshots/27-devopsflow-staging-deployment-success.png)
+
+## 10. Production Deployment
+
+Production deployment is handled through GitHub Pages.
+
+The workflow requires the staging deployment to complete successfully before the production deployment job can proceed.
+
+A production environment approval rule was configured to provide a manual approval checkpoint before deployment.
+
+### Production Approval
+
+![Production approval rule](screenshots/28-devopsflow-production-approval-rule.png)
+
+### Production Deployment
+
+![Production deployment success](screenshots/29-devopsflow-production-deployment-success.png)
+
+### Live Production Application
+
+The application was successfully deployed and made accessible through GitHub Pages.
+
+![Live DevOpsFlow production website](screenshots/30-devopsflow-live-production-website.png)
+
+An earlier GitHub Pages deployment was also verified during the project.
+
+![Initial GitHub Pages deployment](screenshots/09-github-pages-live-deployment.png)
+
+## 11. Getting Started
+
+### Prerequisites
+
+Ensure the following tools are installed:
+
+- Node.js 24 or later.
+- npm.
+- Git.
+- Docker.
+- kubectl.
+- Minikube for local Kubernetes deployment.
+
+### Clone the Repository
 
 ```bash
-kubectl create namespace staging --dry-run=client -o yaml | kubectl apply -f -
+git clone https://github.com/Funmibi-A/devops-capstone.git
+cd devops-capstone
 ```
 
-### Apply the staging deployment
+### Install Dependencies
 
 ```bash
-kubectl apply -f k8s/staging-deployment.yaml
+npm ci
 ```
 
-### Apply the staging service and ingress
+### Start the Development Server
 
 ```bash
-kubectl apply -f k8s/staging-service.yaml
-kubectl apply -f k8s/staging-ingress.yaml
+npm run dev
 ```
 
-### Verify the deployment
+### Run Code Quality Checks
 
 ```bash
-kubectl get pods -n staging
-kubectl get deployments -n staging
-kubectl get services -n staging
+npm run lint
 ```
 
-Check the deployment rollout:
+### Run Unit Tests
 
 ```bash
-kubectl rollout status deployment/devopsflow-staging -n staging
+npm run test -- --run
 ```
 
-The staging ingress hostname is:
+### Run End-to-End Tests
 
-```text
-devopsflow-staging.local
+```bash
+npm run test:e2e
 ```
 
-The GitHub Actions staging job applies the deployment manifest, checks rollout status and performs an HTTP verification against the Minikube cluster.
+### Run Dependency Security Audit
 
-## 9. Security and Reliability
+```bash
+npm audit --audit-level=high
+```
 
-The project implements several measures to improve pipeline reliability and application security:
+### Build the Application
 
-- **npm audit:** Identifies vulnerable npm dependencies.
-- **Trivy:** Scans container images for operating system and library vulnerabilities.
-- **ESLint:** Identifies code quality issues.
-- **Automated testing:** Validates application functionality before deployment.
-- **Readiness and liveness probes:** Help Kubernetes monitor application availability.
-- **Concurrency control:** Prevents unnecessary overlapping workflow executions, particularly for pull requests.
-- **Deployment verification:** Checks that the staging application responds successfully after deployment.
+```bash
+npm run build
+```
 
-## 10. Project Structure
+### Check Bundle Size
+
+```bash
+npm run check:bundle
+```
+
+## 12. Project Structure
 
 ```text
 devops-capstone/
@@ -319,6 +428,11 @@ devops-capstone/
 │   ├── staging-ingress.yaml
 │   └── staging-service.yaml
 │
+├── screenshots/
+│   ├── 01-node-npm-git-versions.png
+│   ├── ...
+│   └── 35-devopsflow-bundle-size-analysis-success.png
+│
 ├── scripts/
 │   └── check-bundle-size.js
 │
@@ -334,30 +448,3 @@ devops-capstone/
 ├── vitest.config.js
 └── README.md
 ```
-
-## 11. Project Outcomes
-
-The project demonstrates the implementation of an automated software delivery workflow, including:
-
-- Automated code validation and testing.
-- Security checks for dependencies and container images.
-- Container image creation and registry publishing.
-- Kubernetes-based staging deployment.
-- Production deployment through GitHub Pages.
-- Automated deployment verification.
-
-## 12. Future Improvements
-
-Potential improvements include:
-
-- Integrating live GitHub Actions data into the dashboard.
-- Adding application performance monitoring.
-- Introducing automated rollback procedures.
-- Implementing additional integration tests.
-- Expanding Kubernetes deployment and monitoring capabilities.
-
-## 13. Repository
-
-**GitHub:** https://github.com/Funmibi-A/devops-capstone
-
-**Author:** Funmibi Adedokun
