@@ -36,8 +36,8 @@ const stages = [
   },
   {
     name: "Deploy",
-    detail: "Awaiting deployment",
-    status: "pending",
+    detail: "Application deployed successfully",
+    status: "success",
     icon: Rocket,
   },
 ];
@@ -53,7 +53,7 @@ function PipelineOverview() {
 
         <span className="pipeline-status">
           <span className="status-indicator" />
-          Ready
+          Successful
         </span>
       </div>
 

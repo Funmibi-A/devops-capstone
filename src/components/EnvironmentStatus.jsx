@@ -18,15 +18,15 @@ const environments = [
   {
     name: "Staging",
     description: "Pre-production testing",
-    version: "Not deployed",
-    status: "pending",
+    version: "Deployed",
+    status: "active",
     icon: TestTube,
   },
   {
     name: "Production",
     description: "Live application",
-    version: "Not deployed",
-    status: "pending",
+    version: "Deployed",
+    status: "active",
     icon: Globe,
   },
 ];
