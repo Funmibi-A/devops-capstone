@@ -54,6 +54,8 @@ jobs:
         env:
           GITHUB_PAGES: "true"
 
+      - name: Check JavaScript bundle size
+        run: npm run check:bundle
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
